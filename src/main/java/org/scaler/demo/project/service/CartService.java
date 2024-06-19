@@ -15,4 +15,6 @@ public interface CartService {
     CartDTO addProduct(CartRequestDTO cartRequestDTO) throws JsonProcessingException;
 
     CartDTO updateCart(CartRequestDTO cartRequestDTO, long cartId);
+
+    CartDTO deleteItem(long itemId);
 }

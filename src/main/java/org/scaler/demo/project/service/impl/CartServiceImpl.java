@@ -145,13 +145,38 @@ public class CartServiceImpl implements CartService {
         ResponseEntity<CartDTO> responseEntity = restTemplate.exchange(putURL
                 , HttpMethod.PUT
                 , cartHttpEntity
-                , new ParameterizedTypeReference<>() {}
+                , new ParameterizedTypeReference<>() {
+                }
                 , new Object[]{cartId});
 
-        if(responseEntity.getStatusCode().is2xxSuccessful()) {
+        if (responseEntity.getStatusCode().is2xxSuccessful()) {
             return responseEntity.getBody();
         }
 
         return null;
+    }
+
+    // delete item
+    @Override
+    public CartDTO deleteItem(long itemId) {
+
+        // We have to use exchange method to get a ResponseEntity
+        // create URL
+        String url = EXTERNAL_CART_API + "/{id}";
+
+        // make the delete call
+        ResponseEntity<CartDTO> responseEntity = restTemplate.exchange(url
+                , HttpMethod.DELETE
+                , null
+                , new ParameterizedTypeReference<>() {}
+                , new Object[]{itemId});
+
+        // check if response is ok
+        CartDTO response = null;
+        if(responseEntity.getStatusCode().is2xxSuccessful()) {
+            response = responseEntity.getBody();
+        }
+
+        return response;
     }
 }

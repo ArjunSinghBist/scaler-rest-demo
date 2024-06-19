@@ -2,8 +2,10 @@ package org.scaler.demo.project.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.websocket.server.PathParam;
+import org.apache.coyote.Response;
 import org.scaler.demo.project.dto.CartDTO;
 import org.scaler.demo.project.dto.CartRequestDTO;
+import org.scaler.demo.project.exceptions.ItemNotFoundException;
 import org.scaler.demo.project.exceptions.ManualException;
 import org.scaler.demo.project.exceptions.UpdateCartException;
 import org.scaler.demo.project.service.CartService;
@@ -63,7 +65,6 @@ public class CartController {
     }
 
     // Update existing product
-    //@PutMapping(value = "/{cartId}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     @PutMapping(path = "/{cartId}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<CartDTO> updateProduct(@PathVariable(value = "cartId") long cartId, @RequestBody CartRequestDTO cartRequestDTO)
             throws JsonProcessingException {
@@ -72,6 +73,19 @@ public class CartController {
         CartDTO cartDTO = cartService.updateCart(cartRequestDTO, cartId);
         if(cartDTO == null) {
             throw new UpdateCartException("Updating of cart failed!");
+        }
+
+        return ResponseEntity.ok(cartDTO);
+    }
+
+    // Delete cart item
+    @DeleteMapping(path = "/{itemId}", produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity<CartDTO> deleteItem(@PathVariable(value = "itemId") long itemId) {
+        logger.info("DELETING THE CART! with id: " + itemId);
+
+        CartDTO cartDTO = cartService.deleteItem(itemId);
+        if(cartDTO == null) {
+            throw new ItemNotFoundException("Item with id: " + itemId + " does not exist!");
         }
 
         return ResponseEntity.ok(cartDTO);

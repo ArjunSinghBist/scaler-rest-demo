@@ -38,7 +38,7 @@ public class RestResponseException{
     }
 
     @ExceptionHandler(value = {ItemNotFoundException.class})
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Please check the parameters!")
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Item does not exist")
     public void ItemNotFound(ItemNotFoundException e){
         e.printStackTrace();
     }
