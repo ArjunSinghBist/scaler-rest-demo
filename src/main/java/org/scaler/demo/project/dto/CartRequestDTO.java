@@ -2,8 +2,10 @@ package org.scaler.demo.project.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.scaler.demo.project.configuration.deserializer.DateDeserializer;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -17,7 +19,7 @@ public class CartRequestDTO {
 
     private long userId;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    @JsonDeserialize(using = DateDeserializer.class)
     private LocalDateTime date;
     private List<ProductDTO> products;
 }
