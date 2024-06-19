@@ -1,4 +1,4 @@
-package org.scaler.demo.project.configuration.deserializer;
+package org.scaler.demo.project.utils.deserializer;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;

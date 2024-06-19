@@ -101,8 +101,8 @@ public class CartServiceImpl implements CartService {
             logger.info("NO RESPONSE FROM API => {}", responseEntity.getStatusCode());
         }
 
-        if(response == null)
-             throw new ItemNotFoundException("Item with Id " + id + " not found");
+        if (response == null)
+            throw new ItemNotFoundException("Item with Id " + id + " not found");
 
         // return the result
         return response;
@@ -122,10 +122,36 @@ public class CartServiceImpl implements CartService {
 
         // return the new added item
         CartDTO cartDTO = null;
-        if(responseEntity.getStatusCode().is2xxSuccessful()) {
+        if (responseEntity.getStatusCode().is2xxSuccessful()) {
             cartDTO = objectMapper.readValue(responseEntity.getBody(), CartDTO.class);
         }
 
         return cartDTO;
+    }
+
+    // update cart
+    @Override
+    public CartDTO updateCart(CartRequestDTO cartRequestDTO, long cartId) {
+
+        // put returns no value
+//        restTemplate.put(EXTERNAL_CART_API + "/" + cartId, cartRequestDTO);
+
+        // Using exchange to carry out PUT
+        // prepare the URL and HTTP Entity
+        String putURL = EXTERNAL_CART_API + "/{id}";
+        HttpEntity<CartRequestDTO> cartHttpEntity = new HttpEntity<>(cartRequestDTO);
+
+        // call exchange
+        ResponseEntity<CartDTO> responseEntity = restTemplate.exchange(putURL
+                , HttpMethod.PUT
+                , cartHttpEntity
+                , new ParameterizedTypeReference<>() {}
+                , new Object[]{cartId});
+
+        if(responseEntity.getStatusCode().is2xxSuccessful()) {
+            return responseEntity.getBody();
+        }
+
+        return null;
     }
 }

@@ -54,4 +54,10 @@ public class RestResponseException{
     public void JsonException(JsonMappingException e){
         e.printStackTrace();
     }
+
+    @ExceptionHandler(value = {UpdateCartException.class})
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Update to Cart failed!")
+    public void UpdateCartException(UpdateCartException e){
+        e.printStackTrace();
+    }
 }

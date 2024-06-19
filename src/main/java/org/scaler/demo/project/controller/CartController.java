@@ -1,9 +1,11 @@
 package org.scaler.demo.project.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import jakarta.websocket.server.PathParam;
 import org.scaler.demo.project.dto.CartDTO;
 import org.scaler.demo.project.dto.CartRequestDTO;
 import org.scaler.demo.project.exceptions.ManualException;
+import org.scaler.demo.project.exceptions.UpdateCartException;
 import org.scaler.demo.project.service.CartService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,16 +25,20 @@ import static org.springframework.http.ResponseEntity.ok;
 @RequestMapping("/carts")
 public class CartController {
 
-    @Autowired
-    private CartService cartService;
+    private final CartService cartService;
+    private final Logger logger;
 
-    private Logger logger = LoggerFactory.getLogger(CartController.class);
+    public CartController(CartService cartService) {
+        this.cartService = cartService;
+        this.logger = LoggerFactory.getLogger(CartController.class);
+    }
+
 
     // Experimenting with Exception Handlers
-  // @ExceptionHandler({IOException.class, RuntimeException.class})
-  // public ResponseEntity<List<CartDTO>> handleException() {
-  //     return  ResponseEntity.internalServerError().build();
-  // }
+    // @ExceptionHandler({IOException.class, RuntimeException.class})
+    // public ResponseEntity<List<CartDTO>> handleException() {
+    //     return  ResponseEntity.internalServerError().build();
+    // }
 
     // get all cart items
     @GetMapping(produces = APPLICATION_JSON_VALUE)
@@ -43,15 +49,32 @@ public class CartController {
 
     // get single item
     @GetMapping("{itemId}")
-    public ResponseEntity<CartDTO> getSingleItem(@PathVariable("itemId") long id) throws JsonProcessingException {
+    public ResponseEntity<CartDTO> getSingleItem(@PathVariable("itemId") long id)
+            throws JsonProcessingException {
         return ResponseEntity.ok(cartService.getItem(id));
     }
 
     // Add new product
     @PostMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<CartDTO> addProduct(@RequestBody CartRequestDTO cartRequestDTO) throws JsonProcessingException {
+    public ResponseEntity<CartDTO> addProduct(@RequestBody CartRequestDTO cartRequestDTO)
+            throws JsonProcessingException {
         logger.info("INSIDE ADDING PRODUCT IN CONTROLLER!!");
         return ResponseEntity.ok(cartService.addProduct(cartRequestDTO));
+    }
+
+    // Update existing product
+    //@PutMapping(value = "/{cartId}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @PutMapping(path = "/{cartId}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity<CartDTO> updateProduct(@PathVariable(value = "cartId") long cartId, @RequestBody CartRequestDTO cartRequestDTO)
+            throws JsonProcessingException {
+        logger.info("UPDATING THE CART! with id: " + cartId);
+
+        CartDTO cartDTO = cartService.updateCart(cartRequestDTO, cartId);
+        if(cartDTO == null) {
+            throw new UpdateCartException("Updating of cart failed!");
+        }
+
+        return ResponseEntity.ok(cartDTO);
     }
 
 }

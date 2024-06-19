@@ -1,14 +1,11 @@
 package org.scaler.demo.project.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.scaler.demo.project.configuration.deserializer.DateDeserializer;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.scaler.demo.project.utils.deserializer.DateDeserializer;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
