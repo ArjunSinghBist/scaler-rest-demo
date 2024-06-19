@@ -1,27 +1,17 @@
 package org.scaler.demo.project.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import jakarta.websocket.server.PathParam;
-import org.apache.coyote.Response;
 import org.scaler.demo.project.dto.CartDTO;
 import org.scaler.demo.project.dto.CartRequestDTO;
 import org.scaler.demo.project.exceptions.ItemNotFoundException;
-import org.scaler.demo.project.exceptions.ManualException;
 import org.scaler.demo.project.exceptions.UpdateCartException;
 import org.scaler.demo.project.service.CartService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.io.IOException;
 import java.util.List;
-
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
 @RequestMapping("/carts")

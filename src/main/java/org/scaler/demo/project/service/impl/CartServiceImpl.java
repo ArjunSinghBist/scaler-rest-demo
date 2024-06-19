@@ -168,12 +168,13 @@ public class CartServiceImpl implements CartService {
         ResponseEntity<CartDTO> responseEntity = restTemplate.exchange(url
                 , HttpMethod.DELETE
                 , null
-                , new ParameterizedTypeReference<>() {}
+                , new ParameterizedTypeReference<>() {
+                }
                 , new Object[]{itemId});
 
         // check if response is ok
         CartDTO response = null;
-        if(responseEntity.getStatusCode().is2xxSuccessful()) {
+        if (responseEntity.getStatusCode().is2xxSuccessful()) {
             response = responseEntity.getBody();
         }
 
