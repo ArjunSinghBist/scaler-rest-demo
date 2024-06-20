@@ -24,6 +24,9 @@ public class DateDeserializer extends StdDeserializer<LocalDateTime> {
     public LocalDateTime deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
         String date = jsonParser.getText();
 
+        // Here we are only Looking for LocalDate and LocalDate time format.
+        // pattern after yyyy-MM-dd is optional. We can pick and choose the optional part as well
+        // as parse more instance types which can possible match. The worst match will be at last.
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd['T'HH:mm:ss.SSS'Z']");
         TemporalAccessor accessor = formatter.parseBest(date, LocalDateTime::from, LocalDate::from);
 
