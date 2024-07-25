@@ -14,8 +14,7 @@ public class Product extends BaseModel{
 
     private String name;
     private String description;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
+    @ManyToOne()
     private Category category;
     private String imageUrl;
 }

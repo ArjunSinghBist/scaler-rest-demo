@@ -1,12 +1,9 @@
 package org.scaler.demo.project.dto;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-@Data
-@NoArgsConstructor
-public class ProductDTO {
+@JsonDeserialize(using = ProductDeserializer.class)
+public record ProductDTO(Long Id, String name, String description, CategoryDTO category, String createdAt,
+                         String lastUpdatedAt) {
 
-    private long productId;
-    private int quantity;
 }

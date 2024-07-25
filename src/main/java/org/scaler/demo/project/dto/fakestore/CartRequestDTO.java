@@ -1,4 +1,4 @@
-package org.scaler.demo.project.dto;
+package org.scaler.demo.project.dto.fakestore;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;

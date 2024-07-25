@@ -1,8 +1,8 @@
 package org.scaler.demo.project.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import org.scaler.demo.project.dto.CartDTO;
-import org.scaler.demo.project.dto.CartRequestDTO;
+import org.scaler.demo.project.dto.fakestore.CartDTO;
+import org.scaler.demo.project.dto.fakestore.CartRequestDTO;
 import org.scaler.demo.project.exceptions.ItemNotFoundException;
 import org.scaler.demo.project.exceptions.UpdateCartException;
 import org.scaler.demo.project.service.CartService;

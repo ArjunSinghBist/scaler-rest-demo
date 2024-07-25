@@ -16,7 +16,6 @@ public class BaseModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
-
     private LocalDateTime createdAt;
     private LocalDateTime lastUpdatedAt;
     private boolean isDeleted;
