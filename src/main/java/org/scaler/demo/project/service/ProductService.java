@@ -1,12 +1,14 @@
 package org.scaler.demo.project.service;
 
 import org.scaler.demo.project.dto.ProductDTO;
-import org.scaler.demo.project.model.Product;
+import org.scaler.demo.project.dto.ProductRequestDTO;
 
 import java.util.List;
 
 public interface ProductService {
-    Product addNewProduct(Product product);
+    ProductDTO addNewProduct(ProductRequestDTO product);
 
     List<ProductDTO> getAllProducts();
+
+    ProductDTO getProductById(Long productId);
 }

@@ -29,9 +29,9 @@ public interface IProductRepository extends JpaRepository<Product, Long> {
     Optional<IProductProjection> nativeGetProductById(@Param("productId") long prodId);
 
     // Return a Class (Record) based DTO projection
-    @Query(value = "SELECT p.name, p.description, p.id FROM products p WHERE Id = :productId", nativeQuery = true)
+    @Query(value = "SELECT p.id, p.name, p.description, p.image_url as imageUrl, p.created_at as createdAt, p.last_updated_at as lastUpdatedAt, c.name as catName, c.description as catDesc FROM products p JOIN categories c ON p.category_id=c.id WHERE p.Id = :productId", nativeQuery = true)
     Map<String, Object> nativeClassBasedProductById(@Param("productId") long prodId);
 
-    @Query(value = "SELECT p.id, p.name, p.description, p.created_at as createdAt, p.last_updated_at as lastUpdatedAt, c.name as catName, c.description as catDesc FROM products p JOIN categories c ON p.category_id=c.id", nativeQuery = true)
+    @Query(value = "SELECT p.id, p.name, p.description, p.image_url as imageUrl, p.created_at as createdAt, p.last_updated_at as lastUpdatedAt, c.name as catName, c.description as catDesc FROM products p JOIN categories c ON p.category_id=c.id", nativeQuery = true)
     List<Map<String, Object>> getAllProducts();
 }
