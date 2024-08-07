@@ -5,7 +5,7 @@ import org.scaler.demo.project.dto.ProductRequestDTO;
 
 import java.util.List;
 
-public interface ProductService {
+public interface IProductService {
     ProductDTO addNewProduct(ProductRequestDTO product);
 
     List<ProductDTO> getAllProducts();

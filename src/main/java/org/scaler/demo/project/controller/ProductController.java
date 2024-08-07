@@ -2,7 +2,7 @@ package org.scaler.demo.project.controller;
 
 import org.scaler.demo.project.dto.ProductDTO;
 import org.scaler.demo.project.dto.ProductRequestDTO;
-import org.scaler.demo.project.service.ProductService;
+import org.scaler.demo.project.service.IProductService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,9 +12,9 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 @RequestMapping("/products")
 public class ProductController {
-    private ProductService productService;
+    private IProductService productService;
 
-    public ProductController(ProductService productService) {
+    public ProductController(IProductService productService) {
         this.productService = productService;
     }
 

@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.scaler.demo.project.dto.fakestore.CartDTO;
 import org.scaler.demo.project.dto.fakestore.CartRequestDTO;
 import org.scaler.demo.project.exceptions.ItemNotFoundException;
-import org.scaler.demo.project.service.CartService;
+import org.scaler.demo.project.service.ICartService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ import java.util.Objects;
 
 
 @Service
-public class CartServiceImpl implements CartService {
+public class CartServiceImpl implements ICartService {
 
     @Value("${CART_API}")
     private String EXTERNAL_CART_API;

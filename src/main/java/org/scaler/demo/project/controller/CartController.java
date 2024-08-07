@@ -5,7 +5,7 @@ import org.scaler.demo.project.dto.fakestore.CartDTO;
 import org.scaler.demo.project.dto.fakestore.CartRequestDTO;
 import org.scaler.demo.project.exceptions.ItemNotFoundException;
 import org.scaler.demo.project.exceptions.UpdateCartException;
-import org.scaler.demo.project.service.CartService;
+import org.scaler.demo.project.service.ICartService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +17,10 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping("/carts")
 public class CartController {
 
-    private final CartService cartService;
+    private final ICartService cartService;
     private final Logger logger;
 
-    public CartController(CartService cartService) {
+    public CartController(ICartService cartService) {
         this.cartService = cartService;
         this.logger = LoggerFactory.getLogger(CartController.class);
     }

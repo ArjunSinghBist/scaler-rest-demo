@@ -5,11 +5,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.scaler.demo.project.dto.CategoryDTO;
 import org.scaler.demo.project.dto.ProductDTO;
-import org.scaler.demo.project.service.ProductService;
+import org.scaler.demo.project.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.data.web.JsonPath;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
@@ -29,7 +28,7 @@ public class ProductControllerMVCTest {
     ObjectMapper objectMapper;
 
     @MockBean
-    private ProductService productService;
+    private IProductService productService;
 
     @Test
     @DisplayName("Get list of products with valid response")

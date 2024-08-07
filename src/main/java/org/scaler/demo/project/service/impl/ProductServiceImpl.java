@@ -12,7 +12,7 @@ import org.scaler.demo.project.model.Category;
 import org.scaler.demo.project.model.Product;
 import org.scaler.demo.project.repository.ICategoryRepository;
 import org.scaler.demo.project.repository.IProductRepository;
-import org.scaler.demo.project.service.ProductService;
+import org.scaler.demo.project.service.IProductService;
 import org.scaler.demo.project.utils.JsonUtils;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ProductServiceImpl implements ProductService {
+public class ProductServiceImpl implements IProductService {
     private final IProductRepository productRepository;
     private final ICategoryRepository categoryRepository;
 

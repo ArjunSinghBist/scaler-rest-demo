@@ -6,7 +6,7 @@ import org.scaler.demo.project.dto.fakestore.CartRequestDTO;
 
 import java.util.List;
 
-public interface CartService {
+public interface ICartService {
 
     List<CartDTO> loadCart() throws JsonProcessingException;
 
