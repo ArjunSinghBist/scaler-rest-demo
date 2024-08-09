@@ -77,6 +77,20 @@ public class ProductServiceImpl implements IProductService {
         return JsonUtils.convertMapToProjection(resMap, ProductDTO.class);
     }
 
+    // Update the product
+    @Override
+    public ProductDTO updateProduct(Product product) {
+        // check if product exists in db
+        Optional<Product> productOptional = productRepository.findById(product.getId());
+
+        if(productOptional.isEmpty()) {
+            throw new ItemNotFoundException(String.format("Product with Id = %d not found!!", product.getId()));
+        }
+
+        productRepository.save(product);
+        return getProductById(product.getId());
+    }
+
     @Override
     public List<ProductDTO> getAllProducts() {
         List<Map<String, Object>> productsMap = productRepository.getAllProducts();
